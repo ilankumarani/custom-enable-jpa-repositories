@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<lombok.version>1.18.30</lombok.version>
 		<openfeign.querydsl.version>6.9</openfeign.querydsl.version>
 		<maven-processor-plugin.version>5.1</maven-processor-plugin.version>
 	</properties>
@@ -37,6 +38,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 
@@ -80,6 +88,7 @@
 							</outputDirectory>
 							<processors>
 								<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+								<processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
 							</processors>
 						</configuration>
 					</execution>
@@ -99,6 +108,11 @@
 						<groupId>io.github.openfeign.querydsl</groupId>
 						<artifactId>querydsl-apt</artifactId>
 						<version>${openfeign.querydsl.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok</artifactId>
+						<version>${lombok.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
