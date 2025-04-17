@@ -41,13 +41,16 @@ class CustomEnableJpaRepositoryTest extends TestData{
 
     @Test
     void saveAll() {
-		List<Blog> blogs = blogRepository.saveAll(getBlogs());
+		List<Blog> blogs = blogRepository.saveAll(getBlogs(null));
 		assertEquals(3, blogs.size());
 
-        List<Owner> owners = ownerRepository.saveAll(getOwners());
+        List<Owner> owners = ownerRepository.saveAll(getOwners(null));
         assertEquals(3, owners.size());
     }
 
-    void
+    void findById(){
+        Blog blog = blogRepository.findById(1L).orElse(null);
+        Owner owner = ownerRepository.findById(1L).orElse(null);
+    }
 
 }
