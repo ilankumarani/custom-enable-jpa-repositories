@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 
 /**
- * @See import org.springframework.data.repository.config.AnnotationRepositoryConfigurationSource;
+ * import org.springframework.data.repository.config.AnnotationRepositoryConfigurationSource;
  */
 public class AbdAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource {
 

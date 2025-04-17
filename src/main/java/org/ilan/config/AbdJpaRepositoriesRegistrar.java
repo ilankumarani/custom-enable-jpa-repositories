@@ -8,7 +8,7 @@ import org.springframework.data.repository.config.RepositoryConfigurationExtensi
 import java.lang.annotation.Annotation;
 
 /**
- * @See import org.springframework.data.jpa.repository.config.JpaRepositoriesRegistrar;
+ * import org.springframework.data.jpa.repository.config.JpaRepositoriesRegistrar;
  */
 public class AbdJpaRepositoriesRegistrar extends AbdRepositoryBeanDefinitionRegistrarSupport {
 

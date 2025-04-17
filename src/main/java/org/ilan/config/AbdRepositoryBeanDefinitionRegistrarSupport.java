@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
 import java.lang.annotation.Annotation;
 
 /**
- * @See import org.springframework.data.repository.config.RepositoryBeanDefinitionRegistrarSupport;
+ *  import org.springframework.data.repository.config.RepositoryBeanDefinitionRegistrarSupport;
  */
 
 
