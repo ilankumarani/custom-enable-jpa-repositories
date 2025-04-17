@@ -12,7 +12,7 @@
 	<artifactId>custom-enable-jpa-repositories</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>custom-enable-jpa-repositories</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Scan JPA repositories from application.yml</description>
 
 	<properties>
 		<java.version>11</java.version>
