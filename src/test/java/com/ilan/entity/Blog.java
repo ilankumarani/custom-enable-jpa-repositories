@@ -1,9 +1,15 @@
 package com.ilan.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "BLOG_DETAILS", schema = "BLOG_SCHEMA")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Blog {
 
     @Id
