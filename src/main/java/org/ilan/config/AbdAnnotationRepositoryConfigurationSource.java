@@ -19,13 +19,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 
 /**
  * @See import org.springframework.data.repository.config.AnnotationRepositoryConfigurationSource;
  */
-@Slf4j
 public class AbdAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource implements EmbeddedValueResolverAware {
+
+    private static final Logger logger = Logger.getLogger(AbdAnnotationRepositoryConfigurationSource.class.getName());
 
     private static final String BASE_PACKAGES = "basePackages";
     private final AnnotationAttributes attributes;
@@ -49,7 +51,7 @@ public class AbdAnnotationRepositoryConfigurationSource extends AnnotationReposi
 
     @Override
     public void setEmbeddedValueResolver(StringValueResolver stringValueResolver) {
-        log.info("StringValueResolverProvider is loaded");
+        logger.info("StringValueResolverProvider is loaded");
         this.stringValueResolver = stringValueResolver;
     }
 
