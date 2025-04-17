@@ -25,6 +25,7 @@
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
 		<maven.release.version>3.1.1</maven.release.version>
 		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
+		<skip.publishing>true</skip.publishing>
 	</properties>
 
 	<dependencies>
@@ -221,6 +222,7 @@
 						<version>0.7.0</version>
 						<extensions>true</extensions>
 						<configuration>
+							<skipPublishing>${skip.publishing}</skipPublishing>
 							<publishingServerId>central</publishingServerId>
 							<autoPublish>true</autoPublish>
 							<waitUntil>published</waitUntil>
