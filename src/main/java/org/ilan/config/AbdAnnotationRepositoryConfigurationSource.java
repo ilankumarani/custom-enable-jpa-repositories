@@ -73,14 +73,11 @@ public class AbdAnnotationRepositoryConfigurationSource extends AnnotationReposi
 
     private String[] parsePackagesSpell(String raw) {
         if (!raw.trim().startsWith("$")) {
-            if (StringUtils.isEmpty(raw)) {
-                return new String[]{};
-            }
-            return getTrimmedArray(raw);
+            return StringUtils.isEmpty(raw)? new String[]{} : getTrimmedArray(raw);
         } else {
             raw = raw.trim();
             String packages = this.environment.getProperty(raw.substring("${".length(), raw.length() - "}".length()));
-            return getTrimmedArray(packages);
+            return StringUtils.isEmpty(packages)? new String[]{} : getTrimmedArray(packages);
         }
     }
 
