@@ -4,6 +4,7 @@ import com.ilan.entity.Blog;
 import com.ilan.entity.QBlog;
 import com.ilan.repository.BlogRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import io.ilan.entity.Owner;
 import io.ilan.entity.QOwner;
 import io.ilan.repository.OwnerRepository;
 import jakarta.persistence.EntityManager;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 @SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.WHEN_AVAILABLE)
-class CustomEnableJpaRepositoryApplicationTests  extends TestData{
+class CustomEnableJpaRepositoryTest extends TestData{
 
 
     private final EntityManager entityManager;
@@ -42,6 +43,11 @@ class CustomEnableJpaRepositoryApplicationTests  extends TestData{
     void saveAll() {
 		List<Blog> blogs = blogRepository.saveAll(getBlogs());
 		assertEquals(3, blogs.size());
+
+        List<Owner> owners = ownerRepository.saveAll(getOwners());
+        assertEquals(3, owners.size());
     }
+
+    void
 
 }

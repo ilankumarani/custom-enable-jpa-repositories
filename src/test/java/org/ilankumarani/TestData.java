@@ -1,6 +1,7 @@
 package org.ilankumarani;
 
 import com.ilan.entity.Blog;
+import io.ilan.entity.Owner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,5 +33,29 @@ public class TestData {
         );
 
         return blogs;
+    }
+
+    public List<Owner> getOwners(){
+        List<Owner> owners = Arrays.asList(
+                Owner.builder()
+                        .id(1L)
+                        .name("Alice Smith")
+                        .email("alice@example.com")
+                        .build(),
+
+                Owner.builder()
+                        .id(2L)
+                        .name("Bob Johnson")
+                        .email("bob@example.com")
+                        .build(),
+
+                Owner.builder()
+                        .id(3L)
+                        .name("Carol Davis")
+                        .email("carol@example.com")
+                        .build()
+        );
+
+        return owners;
     }
 }

@@ -2,17 +2,14 @@ package org.ilan.config;
 
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.data.repository.config.AnnotationRepositoryConfigurationSource;
 import org.springframework.data.util.Streamable;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.util.StringValueResolver;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
@@ -33,8 +30,6 @@ public class AbdAnnotationRepositoryConfigurationSource extends AnnotationReposi
     private final AnnotationAttributes attributes;
     private final AnnotationMetadata configMetadata;
     private final Environment environment;
-    private StringValueResolver stringValueResolver;
-
 
     public AbdAnnotationRepositoryConfigurationSource(AnnotationMetadata metadata, Class<? extends Annotation> annotation, ResourceLoader resourceLoader, Environment environment, BeanDefinitionRegistry registry, BeanNameGenerator importBeanNameGenerator) {
         super(metadata, annotation, resourceLoader, environment, registry, importBeanNameGenerator);
@@ -81,11 +76,15 @@ public class AbdAnnotationRepositoryConfigurationSource extends AnnotationReposi
             if (StringUtils.isEmpty(raw)) {
                 return new String[]{};
             }
-            return Arrays.stream(raw.split(",")).map(String::trim).toArray(String[]::new);
+            return getTrimmedArray(raw);
         } else {
             raw = raw.trim();
             String packages = this.environment.getProperty(raw.substring("${".length(), raw.length() - "}".length()));
-            return Arrays.stream(packages.split(",")).map(String::trim).toArray(String[]::new);
+            return getTrimmedArray(packages);
         }
+    }
+
+    private static String[] getTrimmedArray(String raw) {
+        return Arrays.stream(raw.split(",")).map(String::trim).toArray(String[]::new);
     }
 }
