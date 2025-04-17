@@ -20,3 +20,9 @@ spring:
       settings:
         web-allow-others: true
         trace: true
+
+
+
+jpa:
+  repositories:
+    base-packages: com.ilan.repository,io.ilan.repository

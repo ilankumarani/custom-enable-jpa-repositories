@@ -1,6 +1,5 @@
 package org.ilan.config;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.EmbeddedValueResolverAware;
@@ -10,6 +9,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.data.repository.config.AnnotationRepositoryConfigurationSource;
 import org.springframework.data.util.Streamable;
+import org.springframework.stereotype.Component;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.util.StringValueResolver;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 /**
  * @See import org.springframework.data.repository.config.AnnotationRepositoryConfigurationSource;
  */
-public class AbdAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource implements EmbeddedValueResolverAware {
+public class AbdAnnotationRepositoryConfigurationSource extends AnnotationRepositoryConfigurationSource {
 
     private static final Logger logger = Logger.getLogger(AbdAnnotationRepositoryConfigurationSource.class.getName());
 
@@ -50,17 +50,13 @@ public class AbdAnnotationRepositoryConfigurationSource extends AnnotationReposi
     }
 
     @Override
-    public void setEmbeddedValueResolver(StringValueResolver stringValueResolver) {
-        logger.info("StringValueResolverProvider is loaded");
-        this.stringValueResolver = stringValueResolver;
-    }
-
     public Streamable<String> getBasePackages() {
         String[] value = this.attributes.getStringArray("value");
         String[] basePackages = this.attributes.getStringArray(BASE_PACKAGES);
 
-        String[] packagesFromValue = parsePackagesSpell(value[0]);
-        String[] packagesFromBasePackages = parsePackagesSpell(basePackages[0]);
+
+        String[] packagesFromValue = value.length > 0 ? parsePackagesSpell(value[0]) : new String[0];
+        String[] packagesFromBasePackages = basePackages.length > 0 ? parsePackagesSpell(basePackages[0]) : new String[0];
 
         Class<?>[] basePackageClasses = this.attributes.getClassArray("basePackageClasses");
         if (value.length == 0 && basePackages.length == 0 && basePackageClasses.length == 0) {
@@ -85,11 +81,11 @@ public class AbdAnnotationRepositoryConfigurationSource extends AnnotationReposi
             if (StringUtils.isEmpty(raw)) {
                 return new String[]{};
             }
-            return raw.split(",");
+            return Arrays.stream(raw.split(",")).map(String::trim).toArray(String[]::new);
         } else {
             raw = raw.trim();
-            String packages = stringValueResolver.resolveStringValue(raw);
-            return packages.split(",");
+            String packages = this.environment.getProperty(raw.substring("${".length(), raw.length() - "}".length()));
+            return Arrays.stream(packages.split(",")).map(String::trim).toArray(String[]::new);
         }
     }
 }

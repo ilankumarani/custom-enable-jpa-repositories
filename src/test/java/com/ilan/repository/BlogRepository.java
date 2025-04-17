@@ -1,9 +1,9 @@
-package io.ilan.repo;
+package com.ilan.repository;
 
-import io.ilan.entity.Owner;
+import com.ilan.entity.Blog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OwnerRepository extends JpaRepository<Owner, Long> {
+public interface BlogRepository extends JpaRepository<Blog, Long> {
 }
