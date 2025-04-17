@@ -9,17 +9,18 @@ import io.ilan.entity.QOwner;
 import io.ilan.repository.OwnerRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 @SpringBootTest(useMainMethod = SpringBootTest.UseMainMethod.WHEN_AVAILABLE)
 class CustomEnableJpaRepositoryTest extends TestData{
@@ -39,6 +40,8 @@ class CustomEnableJpaRepositoryTest extends TestData{
 
 
 
+
+    @Order(1)
     @Test
     void saveAll() {
 		List<Blog> blogs = blogRepository.saveAll(getBlogs(null));
@@ -48,9 +51,13 @@ class CustomEnableJpaRepositoryTest extends TestData{
         assertEquals(3, owners.size());
     }
 
+    @Order(2)
+    @Test
     void findById(){
         Blog blog = blogRepository.findById(1L).orElse(null);
         Owner owner = ownerRepository.findById(1L).orElse(null);
+        assertTrue(EqualsBuilder.reflectionEquals(blog, getBlogs(1L).stream().findFirst().orElse(null)));
+        assertTrue(EqualsBuilder.reflectionEquals(owner, getOwners(1L).stream().findFirst().orElse(null)));
     }
 
 }

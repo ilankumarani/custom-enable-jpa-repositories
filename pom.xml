@@ -19,6 +19,7 @@
 		<lombok.version>1.18.30</lombok.version>
 		<openfeign.querydsl.version>6.9</openfeign.querydsl.version>
 		<maven-processor-plugin.version>5.1</maven-processor-plugin.version>
+		<commons-lang3.version>3.17.0</commons-lang3.version>
 	</properties>
 
 	<dependencies>
@@ -47,6 +48,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>io.github.openfeign.querydsl</groupId>
